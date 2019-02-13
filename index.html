@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pizza constructor app</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="container">
+      <div>
+        <h1>Welcome to Pizza Constructor!</h1>
+        <form name="myform">
+            <p>Size:</p>
+            <input type="radio" checked="checked" name="size" value="big"/>big, - 30 santimeters<br />
+            <input type="radio" name="size" value="middle"/>middle, - 25 santimeters<br />
+            <input type="radio" name="size" value="small"/>small, - 20 santimeters<br />
+            <p>Ingredients:</p>
+            <input type="checkbox" checked="checked" name="cheese" />cheese<br />
+            <input type="checkbox"  name="becon" />becon<br />
+            <input type="checkbox"  name="sausage"/>sausage<br />
+            <input type="checkbox"  name="mushrooms"/> mushrooms<br />
+            <input type="checkbox"  name="olives" /> olives<br />
+            <input type="checkbox"  name="spices" /> spices<br />
+            <p>Your information:</p>
+            <input type="text"  name="ClientsName" placeholder="name"/><br />
+            <input type="email" name="ClientsEmail" placeholder="email"/><br />
+            <input type="text"  name="ClientsAdress" placeholder="adress"/><br />
+            <input type="text"  name="ClientsPhone" placeholder="phone number"/><br />
+            <input type="submit" value="Place order" />
+        </form>
+      </div>
+      <div id="pizzaDiv">
+        <img id="main" src="img/main.png" alt="Sorry, here should have been image">
+        <img id="becon" src="img/1becon.png" alt="Sorry, here should have been image">
+        <img id="sausage" src="img/3kolbasa.png" alt="Sorry, here should have been image">
+        <img id="olives" src="img/4olivki.png" alt="Sorry, here should have been image">
+        <img id="spices" src="img/5spise.png" alt="Sorry, here should have been image">
+        <img id ="cheese" src="img/6siiirrr.png" alt="Sorry, here should have been image">
+      </div>
+    </div>
+    <script type="text/javascript" src="script.js">
+    </script>
+  </body>
+</html>
