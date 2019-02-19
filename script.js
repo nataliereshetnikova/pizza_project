@@ -1,8 +1,10 @@
+var checkboxesChecked = []; // можно в массиве их хранить, если нужно использовать
 // регистрация события загрузки документа.
-if (window.addEventListener) window.addEventListener("load", init, false);
+if (window.addEventListener) window.addEventListener('load', init, false);
 
 // установка обработчиков для форм и элементов форм.
 function init() {
+    validateTheme();
     for (var i = 0; i < document.forms.length; i++) {
         var form = document.forms[i];
 
@@ -10,17 +12,20 @@ function init() {
 
         for (var j = 0; j < form.elements.length; j++) {
             var e = form.elements[j];
-
-            // пропускаем все что не поле ввода.
-            if (e.type == "radio") {
-                e.onchange = validateSize;
+            if (e.type == 'select-one') {
+                e.onchange = validateTheme;
             }
-            if(e.type == "checkbox"){
+            if (e.type == 'radio') {
+                e.onchange = validateSize;
+                // e.onchange = validatePrice;
+            }
+            if(e.type == 'checkbox'){
               e.onchange = validateIngredients;
+              // e.onchange = validatePrice;
             }
 
             // проверка имеются ли атрибуты требующие проверки.
-            var pattern = e.getAttribute("data-val");
+            var pattern = e.getAttribute('data-val');
 
             if (pattern) {
                 e.onchange = validateInput; // обработчик на изменение.
@@ -58,7 +63,6 @@ function validateSize(){
 
 function validateIngredients(){
   var checkboxes = document.getElementsByClassName('checkbox');
-  var checkboxesChecked = []; // можно в массиве их хранить, если нужно использовать
   for (var index = 0; index < checkboxes.length; index++) {
     if (checkboxes[index].checked) {
        checkboxesChecked.push(checkboxes[index].value); // положим в массив выбранный
@@ -83,29 +87,58 @@ function validateInput() {
     var res = value.search(pattern);
     if (res == -1) {
         document.getElementById(msgId).innerHTML = msg;
-        this.className = "error";
+        this.className = 'error';
     }
     else {
-        document.getElementById(msgId).innerHTML = "";
-        this.className = "valid";
+        document.getElementById(msgId).innerHTML = '';
+        this.className = 'valid';
     }
 }
 
-// обработчик на submit формы.
+// function for form submitting
 function validateForm() {
 
     var invalid = false;
 
     for (var i = 0; i < this.elements.length; ++i) {
         var e = this.elements[i];
-        if (e.type == "text" && e.onchange != null) {
+        if (e.type =='text' && e.onchange != null) {
             e.onchange();
-            if (e.className == "error") invalid = true;
+            if (e.className == 'error') invalid = true;
         }
     }
 
     if (invalid) {
-        alert("There were errors in form. Please, do it again.");
+        alert('There were errors in form. Please, do it again.');
         return false;
     }
+}
+//function for validating price
+// function validatePrice(){
+//   var price = 0.00;
+//   for (var index = 0; index < checkboxesChecked.length; index++) {
+//       price += parseInt(document.getElementById(checkboxes[index].value).dataset.valPrice);
+//   }
+//   document.getElementById('price').innerHTML = '$' + price;
+// }
+
+//function for choosing theme
+function validateTheme(){
+  if (window.localStorage.pageColor) {
+      document.body.style.backgroundColor = window.localStorage.pageColor;
+  }
+
+  document.getElementById('saveButton').addEventListener("click", function () {
+      var selectedTheme = getCheckedSelect('theme');
+      console.log(selectedTheme);
+      window.localStorage.theme = selectedTheme;
+      document.body.className = selectedTheme;
+  });
+
+  function getCheckedSelect(name) {
+      var elements = document.getElementsByName(name);
+
+      for (var i = 0, len = elements.length; i < len; ++i)
+          if (elements[i].selected) return elements[i].value;
+        }
 }

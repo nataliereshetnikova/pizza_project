@@ -11,6 +11,12 @@
       <div>
         <h1>Welcome to Pizza Constructor!</h1>
         <form name="myform">
+          <p>Theme:</p>
+          <select type="select" size="1">
+          <option name = "theme" selected value="dark">dark</option>
+          <option name = "theme" value="light">light</option>
+          </select>
+          <input id="saveButton" type="button" value="Save" />
             <p>Size:</p>
             <input type="radio" checked="checked" name="size" value="big"/>big, - 30 santimeters<br />
             <input type="radio" name="size" value="middle"/>middle, - 25 santimeters<br />
@@ -51,17 +57,18 @@
                 data-val-msg-id="ClientsPhoneMsg" />
             <span id="ClientsPhoneMsg"></span>
             <br />
+            <p id="price"></p>
             <input type="submit" value="Place order" />
         </form>
       </div>
       <div id="pizzaDiv">
-        <img id="main" src="img/main.png" alt="Sorry, here should have been image">
-        <img id="becon" style="visibility: hidden" src="img/1becon.png" alt="Sorry, here should have been image">
-        <img id="sausage" style="visibility: hidden" src="img/3kolbasa.png" alt="Sorry, here should have been image">
-        <img id="mushrooms" style="visibility: hidden" src="img/2grib.png" alt="Sorry, here should have been image">
-        <img id="olives" style="visibility: hidden" src="img/4olivki.png" alt="Sorry, here should have been image">
-        <img id="spices" style="visibility: hidden" src="img/5spise.png" alt="Sorry, here should have been image">
-        <img id ="cheese" style="visibility: visible" src="img/6siiirrr.png" alt="Sorry, here should have been image">
+        <img id="main" data-val-price='5' src="img/main.png" alt="Sorry, here should have been image">
+        <img id="becon" data-val-price='5' style="visibility: hidden" src="img/1becon.png" alt="Sorry, here should have been image">
+        <img id="sausage" data-val-price='5' style="visibility: hidden" src="img/3kolbasa.png" alt="Sorry, here should have been image">
+        <img id="mushrooms" data-val-price='5' style="visibility: hidden" src="img/2grib.png" alt="Sorry, here should have been image">
+        <img id="olives" data-val-price='5'style="visibility: hidden" src="img/4olivki.png" alt="Sorry, here should have been image">
+        <img id="spices" data-val-price='5' style="visibility: hidden" src="img/5spise.png" alt="Sorry, here should have been image">
+        <img id ="cheese" data-val-price='5' accesskey=""style="visibility: visible" src="img/6siiirrr.png" alt="Sorry, here should have been image">
       </div>
     </div>
     <script type="text/javascript" src="script.js">
