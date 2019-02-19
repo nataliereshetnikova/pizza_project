@@ -16,27 +16,52 @@
             <input type="radio" name="size" value="middle"/>middle, - 25 santimeters<br />
             <input type="radio" name="size" value="small"/>small, - 20 santimeters<br />
             <p>Ingredients:</p>
-            <input type="checkbox" checked="checked" name="cheese" />cheese<br />
-            <input type="checkbox"  name="becon" />becon<br />
-            <input type="checkbox"  name="sausage"/>sausage<br />
-            <input type="checkbox"  name="mushrooms"/> mushrooms<br />
-            <input type="checkbox"  name="olives" /> olives<br />
-            <input type="checkbox"  name="spices" /> spices<br />
+            <input type="checkbox" class="checkbox" checked="checked" value="cheese" />cheese<br />
+            <input type="checkbox" class="checkbox" value="becon" />becon<br />
+            <input type="checkbox" class="checkbox" value="sausage"/>sausage<br />
+            <input type="checkbox" class="checkbox" value="mushrooms"/> mushrooms<br />
+            <input type="checkbox" class="checkbox" value="olives" /> olives<br />
+            <input type="checkbox" class="checkbox" value="spices" /> spices<br />
+
             <p>Your information:</p>
-            <input type="text"  name="ClientsName" placeholder="name"/><br />
-            <input type="email" name="ClientsEmail" placeholder="email"/><br />
-            <input type="text"  name="ClientsAdress" placeholder="adress"/><br />
-            <input type="text"  name="ClientsPhone" placeholder="phone number"/><br />
+            <input type="text"  name="ClientsName" placeholder="name"
+            data-val="\S"
+            data-val-msg="Please, enter value"
+            data-val-msg-id="userNameMsg" />
+            <span id="userNameMsg"></span>
+            <br />
+
+            <input type="text" name="ClientsEmail" placeholder="email"
+            data-val="\b[a-z0-9._]+@[a-z0-9.-]+\.[a-z]{2,4}\b"
+            data-val-msg="You entered a wrong email"
+            data-val-msg-id="emailMsg" />
+            <span id="emailMsg"></span>
+            <br />
+
+            <input type="text"  name="ClientsAdress" placeholder="adress"
+            data-val="\S"
+            data-val-msg="Please, enter value"
+            data-val-msg-id="ClientsAdressMsg" />
+            <span id="ClientsAdressMsg"></span>
+            <br />
+
+            <input type="text"  name="ClientsPhone" placeholder="phone number"
+                data-val="^\d{10}$"
+                data-val-msg="The phone is entered incorrectly, enter 10 digits in the format 0671234567"
+                data-val-msg-id="ClientsPhoneMsg" />
+            <span id="ClientsPhoneMsg"></span>
+            <br />
             <input type="submit" value="Place order" />
         </form>
       </div>
       <div id="pizzaDiv">
         <img id="main" src="img/main.png" alt="Sorry, here should have been image">
-        <img id="becon" src="img/1becon.png" alt="Sorry, here should have been image">
-        <img id="sausage" src="img/3kolbasa.png" alt="Sorry, here should have been image">
-        <img id="olives" src="img/4olivki.png" alt="Sorry, here should have been image">
-        <img id="spices" src="img/5spise.png" alt="Sorry, here should have been image">
-        <img id ="cheese" src="img/6siiirrr.png" alt="Sorry, here should have been image">
+        <img id="becon" style="visibility: hidden" src="img/1becon.png" alt="Sorry, here should have been image">
+        <img id="sausage" style="visibility: hidden" src="img/3kolbasa.png" alt="Sorry, here should have been image">
+        <img id="mushrooms" style="visibility: hidden" src="img/2grib.png" alt="Sorry, here should have been image">
+        <img id="olives" style="visibility: hidden" src="img/4olivki.png" alt="Sorry, here should have been image">
+        <img id="spices" style="visibility: hidden" src="img/5spise.png" alt="Sorry, here should have been image">
+        <img id ="cheese" style="visibility: visible" src="img/6siiirrr.png" alt="Sorry, here should have been image">
       </div>
     </div>
     <script type="text/javascript" src="script.js">

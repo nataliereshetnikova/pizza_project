@@ -1,15 +1,111 @@
-window.addEventListener("load", function () {
-    var f = document.myform;
-    var size = f.size.value;
-    var clientsName = f.ClientsName.value;
-    var clientsEmail = f.ClientsEmail.value;
-    var clientsAdress = f.ClientsAdress.value;
-    var clientsPhone = f.ClientsPhone.value;
-    var cheese = f.cheese.value;
-    var becon = f.becon.value;
-    var sausage = f.sausage.value;
-    var mushrooms = f.mushrooms.value;
-    var olives = f.olives.value;
-    var spices = f.spices.value;
+// регистрация события загрузки документа.
+if (window.addEventListener) window.addEventListener("load", init, false);
 
+// установка обработчиков для форм и элементов форм.
+function init() {
+    for (var i = 0; i < document.forms.length; i++) {
+        var form = document.forms[i];
+
+        var formValidation = false;
+
+        for (var j = 0; j < form.elements.length; j++) {
+            var e = form.elements[j];
+
+            // пропускаем все что не поле ввода.
+            if (e.type == "radio") {
+                e.onchange = validateSize;
+            }
+            if(e.type == "checkbox"){
+              e.onchange = validateIngredients;
+            }
+
+            // проверка имеются ли атрибуты требующие проверки.
+            var pattern = e.getAttribute("data-val");
+
+            if (pattern) {
+                e.onchange = validateInput; // обработчик на изменение.
+                formValidation = true; // форма требует проверку.
+            }
+        }
+        if (formValidation) {
+            form.onsubmit = validateForm; // установка обработчика для формы на submit
+        }
+    }
+}
+
+function validateSize(){
+  var size = this.value;
+  var images = document.getElementsByTagName('img');
+  if(size == 'big'){
+    for (var i = 0;i <images.length; i++){
+      images[i].width = 500;
+      images[i].height = 500;
+    }
+  }
+  if(size == 'middle'){
+    for (var i = 0;i <images.length; i++){
+      images[i].width = 400;
+      images[i].height = 400;
+    }
+  }
+  if(size == 'small'){
+    for (var i = 0;i <images.length; i++){
+      images[i].width = 300;
+      images[i].height = 300;
+    }
+  }
+}
+
+function validateIngredients(){
+  var checkboxes = document.getElementsByClassName('checkbox');
+  var checkboxesChecked = []; // можно в массиве их хранить, если нужно использовать
+  for (var index = 0; index < checkboxes.length; index++) {
+    if (checkboxes[index].checked) {
+       checkboxesChecked.push(checkboxes[index].value); // положим в массив выбранный
+       var img = document.getElementById(checkboxes[index].value); // делайте что нужно - это для наглядности
+       img.style.visibility = 'visible';
+    }
+    else{
+      var img = document.getElementById(checkboxes[index].value); // делайте что нужно - это для наглядности
+      img.style.visibility = 'hidden';
+    }
+ }
+ return checkboxesChecked; // для использования в нужном месте
+}
+
+// обработчик на изменение содержимого полей ввода.
+function validateInput() {
+    var pattern = this.dataset.val,
+        msg = this.dataset.valMsg,
+        msgId = this.dataset.valMsgId,
+        value = this.value;
+
+    var res = value.search(pattern);
+    if (res == -1) {
+        document.getElementById(msgId).innerHTML = msg;
+        this.className = "error";
+    }
+    else {
+        document.getElementById(msgId).innerHTML = "";
+        this.className = "valid";
+    }
+}
+
+// обработчик на submit формы.
+function validateForm() {
+
+    var invalid = false;
+
+    for (var i = 0; i < this.elements.length; ++i) {
+        var e = this.elements[i];
+        if (e.type == "text" && e.onchange != null) {
+            e.onchange();
+            if (e.className == "error") invalid = true;
+        }
+    }
+
+    if (invalid) {
+        alert("There were errors in form. Please, do it again.");
+        return false;
+    }
 }
